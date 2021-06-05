@@ -7,6 +7,7 @@ from rest_framework import status
 
 
 class CollectionList(APIView):
+
     def get(self, request):
         collections = Collection.objects.all()
         serializer = CollectionSerializer(collections, many=True)
@@ -21,6 +22,7 @@ class CollectionList(APIView):
 
 
 class FlashcardList(APIView):
+
     def get(self, request, collection_id):
         collection = Collection.objects.get(pk=collection_id)
         flashcards = Flashcard.objects.filter(collection=collection)
@@ -36,11 +38,17 @@ class FlashcardList(APIView):
 
 
 class FlashcardDetail(APIView):
+
     def put(self, request, flashcard_id):
         select_flashcard = Flashcard.objects.get(pk=flashcard_id)
         Response(select_flashcard)
-        serializer = FlashcardSerializer(select_flashcard, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        updated_flashcard = FlashcardSerializer(select_flashcard, data=request.data)
+        if updated_flashcard.is_valid():
+            updated_flashcard.save()
+            return Response(updated_flashcard.data, status=status.HTTP_202_ACCEPTED)
+        return Response(updated_flashcard.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, flashcard_id):
+        select_flashcard = Flashcard.objects.get(pk=flashcard_id)
+        select_flashcard.delete()
+        return Response(status=status.HTTP_200_OK)
