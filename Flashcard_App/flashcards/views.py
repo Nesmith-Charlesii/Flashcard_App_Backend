@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-# Create your views here.
 class CollectionList(APIView):
     def get(self, request):
         collections = Collection.objects.all()
@@ -33,4 +32,15 @@ class FlashcardList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class FlashcardDetail(APIView):
+    def put(self, request, flashcard_id):
+        select_flashcard = Flashcard.objects.get(pk=flashcard_id)
+        Response(select_flashcard)
+        serializer = FlashcardSerializer(select_flashcard, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
