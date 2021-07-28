@@ -26,10 +26,15 @@ class CollectionList(APIView):
 class FlashcardList(APIView):
 
     def get(self, request, collection_id):
-        collection = Collection.objects.get(pk=collection_id)
-        flashcards = Flashcard.objects.filter(collection=collection)
-        serializer = FlashcardSerializer(flashcards, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        collection = Collection.objects.filter(pk=collection_id)
+        print("collection", collection)
+        if collection:
+            flashcards = Flashcard.objects.filter(collection=collection)
+            print(flashcards)
+            if flashcards:
+                serializer = FlashcardSerializer(flashcards, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(print("No info to retrieve"))
 
     def post(self, request, collection_id):
         serializer = FlashcardSerializer(data=request.data)

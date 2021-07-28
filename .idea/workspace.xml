@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6687c651-e10f-4856-b90a-59efbc176121" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Flashcards_Backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Flashcards_Backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flashcard_App/Flashcard_App/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flashcard_App/Flashcard_App/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flashcard_App/flashcards/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Flashcard_App/flashcards/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flashcard_App/flashcards/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
