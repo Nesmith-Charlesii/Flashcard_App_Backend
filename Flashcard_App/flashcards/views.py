@@ -10,8 +10,10 @@ class CollectionList(APIView):
 
     def get(self, request):
         collections = Collection.objects.all()
-        serializer = CollectionSerializer(collections, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if collections:
+            serializer = CollectionSerializer(collections, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(print("No collections to retrieve"))
 
     def post(self, request):
         serializer = CollectionSerializer(data=request.data)
