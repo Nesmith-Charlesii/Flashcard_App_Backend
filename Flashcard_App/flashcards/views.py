@@ -26,7 +26,7 @@ class CollectionList(APIView):
 class FlashcardList(APIView):
 
     def get(self, request, collection_id):
-        collection = Collection.objects.filter(pk=collection_id)
+        collection = Collection.objects.get(pk=collection_id)
         print("collection", collection)
         if collection:
             flashcards = Flashcard.objects.filter(collection=collection)
@@ -37,8 +37,10 @@ class FlashcardList(APIView):
         return Response(print("No info to retrieve"))
 
     def post(self, request, collection_id):
+        print("collection Id", collection_id)
         serializer = FlashcardSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.validated_data['collection'] = collection_id
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
